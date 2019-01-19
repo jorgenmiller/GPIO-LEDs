@@ -1,7 +1,7 @@
-#Raspberry Pi GPIO rgb cathode led
+#Raspberry Pi GPIO rgb common anode led
 #lights rgb led to specified rgb 1/0 color
 #red lead -> 3 parallel 410 ohm resistors -> GPIO
-#3.3V -> cathode lead
+#3.3V -> anode lead
 #green lead -> 2 parallel 410 ohm resistors -> GPIO
 #blue lead -> 410 ohm resistor -> GPIO
 
@@ -12,7 +12,7 @@ pins = {
     'redPin' : 3 ,
     'greenPin' : 7,
     'bluePin' : 5 ,
-} #physical pins for anode leads
+} #physical pins for cathode leads
 
 def setup(pins):
     GPIO.setmode(GPIO.BOARD) #pins identified by physical numbering system

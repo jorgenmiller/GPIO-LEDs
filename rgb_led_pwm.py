@@ -1,19 +1,18 @@
-#Raspberry Pi GPIO cathode rgb led pwm
+#Raspberry Pi GPIO common anode rgb led pwm
 #lights rgb led of variable color with pwm
 #GPIO -> red lead -> 2 parallel 410 ohm resistors
-#3.3V -> cathode lead
+#3.3V -> anode lead
 #GPIO -> green lead -> 410 ohm resistor
 #GPIO -> blue lead -> 410 ohm resistor
 
 import RPi.GPIO as GPIO
 import time
-from threading import Thread
 
 pins = {
     'redPin' : 3 ,
     'greenPin' : 7,
     'bluePin' : 5 ,
-} #physical pins for anode leads
+} #physical pins for cathode leads
 
 GPIO.setmode(GPIO.BOARD) #pins identified by physical numbering system
 GPIO.setwarnings(False)
@@ -25,14 +24,14 @@ green = GPIO.PWM(pins['greenPin'], 100)
 blue = GPIO.PWM(pins['bluePin'], 100)
 
 def main(pins, red, green, blue):
-    red.start(100) #100% of cycle applyig voltage, starts as off
+    red.start(100) #led off, inverse due to common anode led
     green.start(100)
     blue.start(100)
     while True:
         redColor = int(input('red 0-100: ')) #ask for individual rgb
         greenColor = int(input('green 0-100: '))
         blueColor = int(input('blue 0-100: '))
-        red.ChangeDutyCycle(100 - redColor) #change active percents, inverse due to 3.3V->cathode
+        red.ChangeDutyCycle(100 - redColor) #change active percents, inverse due to common cathode
         green.ChangeDutyCycle(100 - greenColor)
         blue.ChangeDutyCycle(100 - blueColor)
         print()
