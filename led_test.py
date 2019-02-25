@@ -3,6 +3,7 @@
 #B17 -> led -> 200 ohm resistor -> ground
 
 import RPi.GPIO as GPIO
+import time
 
 def setup():
     GPIO.setmode(GPIO.BCM) #pins identified by BCM numbering system
@@ -10,6 +11,8 @@ def setup():
 
 def main():
     GPIO.output(17, GPIO.HIGH) #led on
+    while True:
+        time.sleep(1)
 
 try:
     setup()
